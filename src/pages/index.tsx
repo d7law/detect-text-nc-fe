@@ -4,7 +4,6 @@ import React from "react";
 
 const RootPage = () => {
   useRedirect("detect");
-  console.log("Haha");
   return <LoadingPage loading={true} />;
 };
 
