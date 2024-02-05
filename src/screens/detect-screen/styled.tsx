@@ -6,6 +6,7 @@ export const DetectWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 export const DetectContainer = styled.div`
@@ -35,6 +36,7 @@ export const DetectMessage = styled.div<{ hidden?: boolean }>`
 
 export const DetectMessageText = styled.div`
   margin-top: 12px;
+  margin-bottom: 13px;
   text-align: center;
 `;
 

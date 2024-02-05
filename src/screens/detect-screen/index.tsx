@@ -1,3 +1,4 @@
+import DogButton from "components/dog-button";
 import {
   DetectContainer,
   DetectImage,
@@ -21,7 +22,7 @@ const DetectScreen = () => {
     }
     const data = dataClipboard.getAsFile();
 
-    const blob = new Blob([data], { type: data.type });
+    const blob = new Blob([data], { type: data?.type });
     setImageSrc(URL.createObjectURL(blob));
   };
 
@@ -30,6 +31,7 @@ const DetectScreen = () => {
       <DetectWrapper>
         <DetectContainer>
           <DetectMessage hidden={imageSrc ? true : false}>
+            <DetectMessageText>Click vào khung này và</DetectMessageText>
             <DetectShortcut>
               <DetectShortcutKey>Ctrl</DetectShortcutKey>
               <DetectShortcutSign>+</DetectShortcutSign>
@@ -41,6 +43,7 @@ const DetectScreen = () => {
 
           {imageSrc && <DetectImage src={imageSrc} />}
         </DetectContainer>
+        {imageSrc && <DogButton content="Click here" ></DogButton>}
       </DetectWrapper>
     </div>
   );
