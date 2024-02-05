@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   DetectContainer,
   DetectImage,
@@ -9,43 +8,41 @@ import {
   DetectShortcutSign,
   DetectWrapper,
 } from "./styled";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const DetectScreen = () => {
-  const [imageData, setImageData] = useState(null);
+  const [imageSrc, setImageSrc] = useState<string>(null);
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const clipboard = e.clipboardData;
-    const imageFile = clipboard?.files[0];
-    if (!imageFile) {
-      console.log("failed");
-      return;
+    const dataClipboard = e.clipboardData.items[0];
+    console.log(dataClipboard);
+    if (dataClipboard.type !== "image/png") {
+      console.log("Not Image");
     }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const res = e.target?.result;
-      setImageData(res);
-    };
-    reader.readAsDataURL(imageFile);
-    console.log("Okk");
+    const data = dataClipboard.getAsFile();
+
+    const blob = new Blob([data], { type: data.type });
+    setImageSrc(URL.createObjectURL(blob));
   };
 
   return (
-    <DetectWrapper>
-      <DetectContainer>
-        <DetectMessage>
-          <DetectShortcut>
-            <DetectShortcutKey>Ctrl</DetectShortcutKey>
-            <DetectShortcutSign>+</DetectShortcutSign>
-            <DetectShortcutKey>V</DetectShortcutKey>
-          </DetectShortcut>
+    <div onPaste={handlePaste}>
+      <DetectWrapper>
+        <DetectContainer>
+          <DetectMessage hidden={imageSrc ? true : false}>
+            <DetectShortcut>
+              <DetectShortcutKey>Ctrl</DetectShortcutKey>
+              <DetectShortcutSign>+</DetectShortcutSign>
+              <DetectShortcutKey>V</DetectShortcutKey>
+            </DetectShortcut>
 
-          <DetectMessageText>để dán hình ảnh vừa chụp</DetectMessageText>
-        </DetectMessage>
-      </DetectContainer>
-      <input type="text" accept="image/*" onPaste={handlePaste} hidden />
-      {imageData && <DetectImage src={imageData} />}
-    </DetectWrapper>
+            <DetectMessageText>để dán hình ảnh vừa chụp</DetectMessageText>
+          </DetectMessage>
+
+          {imageSrc && <DetectImage src={imageSrc} />}
+        </DetectContainer>
+      </DetectWrapper>
+    </div>
   );
 };
 

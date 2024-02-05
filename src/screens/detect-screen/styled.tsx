@@ -24,8 +24,8 @@ export const DetectContainer = styled.div`
   background-color: black;
 `;
 
-export const DetectMessage = styled.div`
-  display: flex;
+export const DetectMessage = styled.div<{ hidden?: boolean }>`
+  display: ${(props) => (props.hidden ? "none" : "flex")};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -53,6 +53,6 @@ export const DetectShortcutSign = styled.span`
   margin: 0 6px;
 `;
 
-export const DetectImage = styled.image<{ src: string }>`
+export const DetectImage = styled.img<{ src: string }>`
   src: ${(props) => props.src};
 `;

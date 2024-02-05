@@ -16,7 +16,6 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (window) {
       moment.tz.setDefault("Asia/Ho_Chi_Minh");
-      console.log("OKK");
     }
   }, []);
 
