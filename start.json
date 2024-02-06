@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "detect-text-nc-fe-3026",
+      "script": "node_modules/next/dist/bin/next",
+      "args": ["start", "-p", "3026"],
+      "instances": "max",
+      "instance_var": "INSTANCE_ID",
+      "exec_mode": "cluster",
+      "cwd": "./",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
