@@ -10,13 +10,15 @@ import {
   DetectWrapper,
 } from "./styled";
 import React, { useEffect, useState } from "react";
+import { detectTextApi, getHello } from "api";
 
 const DetectScreen = () => {
   const [imageSrc, setImageSrc] = useState<string>(null);
+  const [imageFile, setImageFile] = useState<File>(null);
 
   const handleClick = async () => {
-    console.log("submitted");
-    console.log(imageSrc);
+    const { data } = await detectTextApi({ image: imageFile });
+    console.log(data);
   };
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
@@ -26,6 +28,8 @@ const DetectScreen = () => {
       console.log("Not Image");
     }
     const data = dataClipboard.getAsFile();
+
+    setImageFile(data);
 
     const blob = new Blob([data], { type: data?.type });
     setImageSrc(URL.createObjectURL(blob));

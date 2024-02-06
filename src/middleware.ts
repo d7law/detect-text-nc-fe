@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { NextResponse as res } from "next/server";
 
 export const config = {
-  matcher: ["/api"],
+  matcher: ["/api/:path*"],
 };
 
 export default async function middleware(req: NextRequest) {

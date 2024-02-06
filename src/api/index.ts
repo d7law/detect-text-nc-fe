@@ -1,7 +1,20 @@
-import axios from "axios";
+import axios, { CancelToken } from "axios";
 
-const request = axios.create({ baseURL: "/api" });
+export interface ResponseGenerator<T extends object> {
+  config?: any;
+  data?: T;
+  headers?: any;
+  request?: any;
+  status?: number;
+  statusText?: string;
+}
 
+export interface IDetectTextApi {
+  result?: string;
+}
+
+const request = axios.create({ baseURL: `/api` });
+console.log(request.defaults.baseURL);
 request.interceptors.request.use(
   (config) => {
     return config;
@@ -20,13 +33,15 @@ request.interceptors.response.use(
   }
 );
 
-export interface ResponseGenerator<T extends object> {
-  config?: any;
-  data?: T;
-  headers?: any;
-  request?: any;
-  status?: number;
-  statusText?: string;
-}
+export const getHello = (cancelToken?: CancelToken) => {
+  return request.get("");
+};
 
-export default request;
+export const detectTextApi = (
+  body: { image: File },
+  cancelToken?: CancelToken
+) => {
+  const formData = new FormData();
+  formData.append("image", body.image);
+  return request.post<IDetectTextApi>("/detect-text", formData);
+};
