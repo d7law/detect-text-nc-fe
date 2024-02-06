@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import bg from "../../../public/backgrounds/detect-text-nc.bg.jpg";
+import { createBox, createTheme } from "@mui/system";
 
 export const DetectWrapper = styled.div`
   height: 100vh;
