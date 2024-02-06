@@ -14,6 +14,11 @@ import React, { useEffect, useState } from "react";
 const DetectScreen = () => {
   const [imageSrc, setImageSrc] = useState<string>(null);
 
+  const handleClick = async () => {
+    console.log("submitted");
+    console.log(imageSrc);
+  };
+
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const dataClipboard = e.clipboardData.items[0];
     console.log(dataClipboard);
@@ -43,7 +48,9 @@ const DetectScreen = () => {
 
           {imageSrc && <DetectImage src={imageSrc} />}
         </DetectContainer>
-        {imageSrc && <DogButton content="Click here" ></DogButton>}
+        {imageSrc && (
+          <DogButton content="Click here" onCLick={handleClick}></DogButton>
+        )}
       </DetectWrapper>
     </div>
   );

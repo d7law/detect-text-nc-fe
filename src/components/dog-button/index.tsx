@@ -3,10 +3,11 @@ import { DogButtonContainer, DogButtonWrapper } from "./styled";
 
 interface DogButtonProps {
   content: string;
-  onSubmit?: () => void;
+  onCLick?: () => void;
+  actionApi?: () => void;
 }
 
-const DogButton = ({ content, onSubmit }: DogButtonProps) => {
+const DogButton = ({ content, onCLick, actionApi }: DogButtonProps) => {
   const animateDogBtn = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.currentTarget?.classList.remove("animate");
@@ -14,12 +15,10 @@ const DogButton = ({ content, onSubmit }: DogButtonProps) => {
     setTimeout(() => {
       e.currentTarget?.classList.remove("animate");
     }, 1000);
+
+    actionApi();
   };
-  return (
-    <DogButtonContainer onClick={animateDogBtn} onSubmit={onSubmit}>
-      {content}
-    </DogButtonContainer>
-  );
+  return <DogButtonContainer onClick={onCLick}>{content}</DogButtonContainer>;
 };
 
 export default DogButton;
